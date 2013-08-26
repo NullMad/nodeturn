@@ -1,0 +1,47 @@
+extends layout
+
+block content
+    div
+        a(id='sender')='Send a Message'
+        ul(id='receiver')
+    script.
+        window.onload = function() {
+        /**
+        * Definitions
+        */
+        // defines a new channel "chat", define what happens when a chat event is received
+                Chilly.listen('chat', function(msg){
+                    console.log('Chat event received.');
+                    console.log(msg);
+                });
+        // define an event on the update channel
+                Chilly.onUpdate('sum', function(data) {
+                    console.log('Sum update received.');
+                    console.log(data);
+                });
+        // one more event on the update channel
+                Chilly.onUpdate('multiply', function(data) {
+                    console.log('Multiply update received.');
+                    console.log(data);
+                });
+                    /**
+                    * Login
+                    */
+        // login is required to register a player with Chilly
+        // password implementation is up to the user
+            Chilly.request('login', {
+                        data: {
+                        username: 'user' + Math.floor(Math.random()*1001) // random number for testing in multiple browsers at the same time
+                        },
+                        success:function (data) {
+                        Chilly.init(); // triggers init event
+                            Chilly.longPoll(); // start listening to defined channels for updates (update [default] + chat [user defined])
+                            },
+                            error: function(data) {
+                // @verification must be added to check if username / password was correct
+                // if already logged in:
+                                Chilly.init(); // triggers init event
+                                Chilly.longPoll(); // start listening to defined channels for updates (update [default] + chat [user defined])
+                }
+                });
+        };
