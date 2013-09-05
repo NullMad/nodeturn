@@ -1,0 +1,14 @@
+precision mediump float;
+
+varying vec4 vColor;
+
+varying float pos;
+
+void main(void) {
+
+    if(pos <0.0){
+        gl_FragColor = vColor;
+    }else{
+        gl_FragColor = vec4(1.0*pos,0.5,0.5,1.0);
+    }
+}

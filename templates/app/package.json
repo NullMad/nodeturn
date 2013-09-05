@@ -1,15 +1,17 @@
 {
-  "name": "YOUR-PROJECT-NAME-HERE",
-  "description": "YOUR PROJECT DESCRIPTION HERE",
-  "author": "YOUR NAME <your@emailaddress.com>",
+  "name": "nodeturn",
+  "description": "turnengine server",
+  "author": "Alexei Sumila",
   "version": "0.0.1",
   "dependencies": {
-    "connect": "1.8.5",
-    "express": "2.5.2",
-    "jade": "0.20.0",
-    "mongoose": "2.4.8",
-    "socket.io": "0.8.7",
-    "chilly": "0.2.0"
+    "connect": "2.8.7",
+    "express": "3.0.0",
+    "jade": "0.35.0",
+    "mongoose": "3.6.18",
+    "socket.io": "0.9.16",
+    "passport": "0.1.17",
+    "underscore": "1.5.1",
+    "socket.io-session": "0.0.5"
   },
   "devDependencies": {
     "vows": "0.5.x",

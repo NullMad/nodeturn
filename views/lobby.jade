@@ -1,0 +1,40 @@
+extends layout
+
+block content
+    #accordion
+        h3 Players
+        div
+            ol(id="selectable")
+                ul Player1
+
+    div
+        #accordion2.panels
+            h3 Units
+            ol#selectable
+                li.ui-widget-content Item 1
+                li.ui-widget-content Item 2
+                li.ui-widget-content Item 3
+                li.ui-widget-content Item 4
+                li.ui-widget-content Item 5
+                li.ui-widget-content Item 6
+                li.ui-widget-content Item 7
+            h3 Available Actions
+            ol#selectable
+                li.ui-widget-content Move
+                li.ui-widget-content Shoot
+    #main3D.main
+        canvas(style='border: none;width:100%;height:100%;')
+    .chat Players and Chat
+
+
+
+
+
+block localscripts
+    script(src='/js/lobby.js')
+    script(src='/js/libraries/glMatrix-0.9.5.min.js')
+    script(src='/js/libraries/webgl-utils.js')
+    script#shader-vs(type='x-shader/x-vertex', src='/js/glengine/shaders/vertex.shdr')
+    script#shader-fs(type='x-shader/x-fragment', src='/js/glengine/shaders/frag.shdr')
+    script(src='/js/glengine/gl-engine.js')
+    script(src='/js/glengine/gl-primitives.js')

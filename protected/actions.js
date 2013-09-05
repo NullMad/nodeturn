@@ -38,7 +38,7 @@ module.exports = function(Chilly, models, config, helpers) {
                 Game = Chilly.Games[Object.keys(Chilly.Games)[0]];
             }
 
-            // add player to the gamež
+            // add player to the gameï¿½
             // @change this to expand the player object with custom functionality
             Game.addPlayer({
                 "username": username,
@@ -50,6 +50,17 @@ module.exports = function(Chilly, models, config, helpers) {
             request.session.set('username', username);
             request.session.set('gameId', Game.id);
             // @add additional if needed
+
+            Chilly.push({
+                recipients: Game.getRecipients(),
+                channel: 'update',
+                data: {
+                    action: 'login',
+                    player: request.session.get('username'),
+                    message: request.data.message,
+                    datetime: new Date()
+                }
+            });
 
             // respond
             request.respond.ok('Authorization successful.');
@@ -79,7 +90,7 @@ module.exports = function(Chilly, models, config, helpers) {
     /**
      * Respond to a sum request
      */
-    Chilly.action('sum', {
+    Chilly.action('requestPlayers', {
         user: function(request) {
             var Game = Chilly.getGame(request.session.get('gameId'));
             Chilly.push({
