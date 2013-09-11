@@ -2,10 +2,11 @@ extends layout
 
 block content
     #accordion
-        h3 Players
+        h3=playername
         div
             ol(id="selectable")
-                ul Player1
+                each val, index in others
+                    ul=val
 
     div
         #accordion2.panels
@@ -31,7 +32,7 @@ block content
 
 
 block localscripts
-    script(src='/js/lobby.js')
+    script(src='/js/lobby_page.js')
     script(src='/js/libraries/glMatrix-0.9.5.min.js')
     script(src='/js/libraries/webgl-utils.js')
     script#shader-vs(type='x-shader/x-vertex', src='/js/glengine/shaders/vertex.shdr')

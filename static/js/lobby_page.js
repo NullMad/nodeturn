@@ -19,8 +19,16 @@ $(function() {
     $( "#accordion2" ).accordion();
 });
 var socket = io.connect();
-socket.emit('ping clients','some text');
+socket.emit("echo");
+socket.on("echo",function(stuff){
+    console.log("Client Echo!");
+});
 
+socket.on("new player",function(val){
+
+});
+
+console.log(_.functions(document.getElementById('selectable')));
 var FG_SHADER;
 var VX_SHADER;
 

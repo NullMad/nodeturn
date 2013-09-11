@@ -5,8 +5,8 @@ $(function() {
             event.preventDefault();
 
             var socket = io.connect();
-            socket.emit('set nickname','Namez');
-            socket.emit('message', 'Message Sent on ' + new Date());
+            socket.emit('set nickname',$("#name").val());
+            //socket.emit('message', 'Message Sent on ' + new Date());
 
 
             socket.on('ready', function(data){

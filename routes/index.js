@@ -4,11 +4,10 @@
  */
 
 exports.index = function(req, res){
-    res.render('index',{
-        locals : {
+    res.render('login',{
             title : 'Login'
             ,description: 'Please enter your username'
             ,author: 'Alexei Sumila'
         }
-    });
+    );
 };

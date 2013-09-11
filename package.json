@@ -11,7 +11,7 @@
     "socket.io": "0.9.16",
     "passport": "0.1.17",
     "underscore": "1.5.1",
-    "socket.io-session": "0.0.5"
+    "session.socket.io": "0.1.6"
   },
   "devDependencies": {
     "vows": "0.5.x",
