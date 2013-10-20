@@ -1,15 +1,16 @@
+var engine = ENGINE;
 $(document).ready(function(){
     jQuery.get('http://localhost:8081/js/glengine/shaders/vertex.shdr', function(data) {
         VX_SHADER = data;
         jQuery.get('http://localhost:8081/js/glengine/shaders/frag.shdr', function(data) {
             FG_SHADER = data;
-            webGLStart();
+            engine.webGLStart();
         });
     });
 
 });
 $(window).resize(function() {
-    webGLResize();
+    engine.webGLResize();
 });
 $(function() {
     $( "#selectable" ).selectable();
@@ -25,10 +26,14 @@ socket.on("echo",function(stuff){
 });
 
 socket.on("new player",function(val){
-
+    console.log("new player");
+    console.log(val);
+   var list = document.getElementById('selectable');
+    var ul = document.createElement("ul");
+    ul.innerHTML = val.nick;
+    list.appendChild(ul);
 });
 
-console.log(_.functions(document.getElementById('selectable')));
-var FG_SHADER;
-var VX_SHADER;
+console.log(_.functions());
+
 

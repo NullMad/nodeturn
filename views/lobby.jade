@@ -32,10 +32,12 @@ block content
 
 
 block localscripts
-    script(src='/js/lobby_page.js')
     script(src='/js/libraries/glMatrix-0.9.5.min.js')
     script(src='/js/libraries/webgl-utils.js')
     script#shader-vs(type='x-shader/x-vertex', src='/js/glengine/shaders/vertex.shdr')
     script#shader-fs(type='x-shader/x-fragment', src='/js/glengine/shaders/frag.shdr')
+    script(src='/js/glengine/scene.js')
+    script(src='/js/glengine/camera.js')
     script(src='/js/glengine/gl-engine.js')
     script(src='/js/glengine/gl-primitives.js')
+    script(src='/js/lobby_page.js')

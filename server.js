@@ -4,7 +4,7 @@ var connect = require('connect')
     , express = require('express')
     , routes = require('./routes')
     , lobby = require('./routes/lobby')
-    , port = (process.env.PORT || 8081)
+    , port = 8081
     , _ = require('underscore')
     , path = require('path');
 
@@ -35,14 +35,12 @@ app.use(function(err, req, res, next){
             title : '404 - Not Found'
             ,description: ''
             ,author: ''
-            ,analyticssiteid: 'XXXXXXX'
         },status: 404 });
     } else {
         res.render('500.jade', { locals: {
             title : 'The Server Encountered an Error'
             ,description: ''
             ,author: ''
-            ,analyticssiteid: 'XXXXXXX'
             ,error: err
         },status: 500 });
     }
@@ -54,23 +52,41 @@ sessionSockets.on('connection', function(err, socket, session){
     socket.on('set nickname', function (name) {
         socket.set('nickname', name, function () {
             if(!session) return;
+            if(!session.name){
+                session.name = name;
 
-            session.name = name;
+                _.each(io.sockets.clients(),function (ssocket, index, list) {
+                        console.log("synch");
+                    // so far we have access only to client sockets
+                    sessionSockets.getSession(ssocket, function (err, ssession) {
+                        if(err) {
+                            console.log("Error");
+                            console.log(err);
+                            return;
+                        }
+                        // getSession gives you an error object or the session for a given socket
+                        sockconns[ssocket.id] = ssession.name;
+                        console.log("before");
+                    });
+                    }
+                );
+                /*io.sockets.clients().forEach(function (ssocket) {
+                    // so far we have access only to client sockets
+                    sessionSockets.getSession(ssocket, function (err, ssession) {
+                        // getSession gives you an error object or the session for a given socket
+                        sockconns[ssocket.id] = ssession.name;
+                        console.log("before");
+                    });
+                });*/
+                console.log("after");
+                var names = [];
 
-            io.sockets.clients().forEach(function (ssocket) {
-                // so far we have access only to client sockets
-                sessionSockets.getSession(ssocket, function (err, ssession) {
-                    // getSession gives you an error object or the session for a given socket
-                    sockconns[ssocket.id] = ssession.name;
-                });
-            });
-            console.log(sockconns);
-            var names = [];
-
-            session.players = sockconns;
-            session.save();
+                session.players = sockconns;
+                session.save();
+                socket.broadcast.emit('new player',{id: socket.id, nick: name});
+            }
             socket.emit('ready');
-            socket.broadcast.emit('new player',{id: socket.id, nick: name});
+
         });
     });
 
