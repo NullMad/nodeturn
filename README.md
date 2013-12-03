@@ -13,3 +13,5 @@ Libraries holds 3rd party libraries I use, and glengine is sort of main thing at
 * as far as "should" work: besides the usual setup hickups there is one(as if only one) issue which i haven't really addressed. Depending on which version of windows you are running you server will be defaulted to either ipv4 or ipv6. Look for the line var server = app.listen(port,"::1"); in server.js. The ::1 is "localhost" for ipv6. If that resolves to nothing than try replacing that with "localhost".
 
 That's all i can think of right now. 
+
+* ps: looking from the fact that .idea folder is here, this is actually a fully checked in legit webstorm project. Anyway. Instruction is the same
